@@ -55,8 +55,6 @@ mail to: 'gamers0901@gmail.com',
 subject: "Cher lion Votre compilation est terminée: ${currentBuild.fullDisplayName}",
 body: " Votre build est accompli, Veuilez vérifier: ${env.BUILD_URL}"
 }
-}
-post {
 always {
 sh "docker stop calculator"
 }
