@@ -42,12 +42,23 @@ steps {
 sh "docker run -d --rm -p 8765:8080 --name calculator localhost:5000/calculator"
 }
 }
+stage("Test d'acceptation") {
+steps {
+sleep 60
+sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
+}
+}
 }
 post {
 always {
 mail to: 'gamers0901@gmail.com',
 subject: "Cher lion Votre compilation est terminée: ${currentBuild.fullDisplayName}",
 body: " Votre build est accompli, Veuilez vérifier: ${env.BUILD_URL}"
+}
+}
+post {
+always {
+sh "docker stop calculator"
 }
 }
 }
